@@ -13,7 +13,6 @@ query ($login: String!) {
         name
         description
         stargazerCount
-        forkCount
         primaryLanguage { name color }
         url
       }
@@ -81,8 +80,6 @@ async function fetchAllTimeCommits(username, token, createdAt) {
 
 function processData(user) {
   const repos = user.repositories.nodes;
-  const totalStars = repos.reduce((s, r) => s + r.stargazerCount, 0);
-  const totalForks = repos.reduce((s, r) => s + r.forkCount, 0);
   const totalRepos = user.repositories.totalCount;
   const totalCommits = user._allTimeCommits || user.contributionsCollection.totalCommitContributions;
 
@@ -105,15 +102,13 @@ function processData(user) {
     .map(r => ({
       name: r.name,
       desc: r.description,
-      stars: r.stargazerCount,
-      forks: r.forkCount,
       lang: r.primaryLanguage ? r.primaryLanguage.name : null,
       langColor: r.primaryLanguage ? r.primaryLanguage.color : '#555',
       url: r.url,
     }));
 
   return {
-    stats: { totalStars, totalForks, totalRepos, totalCommits },
+    stats: { totalRepos, totalCommits },
     languages,
     topProjects,
     calendar: user.contributionsCollection.contributionCalendar,
@@ -264,14 +259,12 @@ function generateSVG(data) {
     const baseY = y;
     const s = data.stats;
     const items = [
-      { val: s.totalStars, label: 'STARS', color: '#ffcc33' },
-      { val: s.totalForks, label: 'FORKS', color: '#e8c8ff' },
       { val: s.totalRepos, label: 'REPOS', color: '#7ee7ff' },
       { val: s.totalCommits, label: 'COMMITS', color: '#ff88cc' },
     ];
     let cols = '';
     const colW = 170;
-    const startX = (W - colW * 4) / 2;
+    const startX = (W - colW * items.length) / 2;
     items.forEach((item, i) => {
       const cx = startX + i * colW + colW / 2;
       cols += `
@@ -279,7 +272,7 @@ function generateSVG(data) {
         <text x="${cx}" y="${baseY+45}" text-anchor="middle" font-family="${font}" font-size="28" font-weight="900" fill="#ffffff">${item.val}</text>
         <text x="${cx}" y="${baseY+65}" text-anchor="middle" font-family="${font}" font-size="9" fill="${item.color}" letter-spacing="2.5" font-weight="800">${item.label}</text>
       </g>`;
-      if (i < 3) {
+      if (i < items.length - 1) {
         cols += `<line x1="${startX + (i+1) * colW}" y1="${baseY+25}" x2="${startX + (i+1) * colW}" y2="${baseY+72}" stroke="rgba(120,80,220,0.2)" stroke-width="0.8" stroke-dasharray="3 3"/>`;
       }
     });
@@ -420,9 +413,6 @@ function generateSVG(data) {
           <circle cx="5" cy="5" r="5" fill="${accent}" opacity="0.9"/>
           <text x="16" y="9" font-family="${font}" font-size="10" font-weight="700" fill="${accent}">${p.lang || 'N/A'}</text>
         </g>
-        <g transform="translate(${cx+cardW-75}, ${cy+cardH-42})">
-          <text x="0" y="9" font-family="${font}" font-size="10" fill="rgba(200,200,230,0.5)" font-weight="600">\u2605 ${p.stars}  \u2442 ${p.forks}</text>
-        </g>
       </g>`;
     });
 
@@ -466,7 +456,7 @@ function mockData() {
     weeks.push({ contributionDays: days });
   }
   return {
-    stats: { totalStars: 0, totalForks: 0, totalRepos: 0, totalCommits: 0 },
+    stats: { totalRepos: 0, totalCommits: 0 },
     languages: [
       { name: 'Python', color: '#3572A5', percentage: 25 },
       { name: 'Java', color: '#b07219', percentage: 25 },
