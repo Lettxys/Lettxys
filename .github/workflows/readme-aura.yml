@@ -28,12 +28,12 @@ jobs:
       - name: Generate unified profile SVG
         env:
           GITHUB_TOKEN: ${{ secrets.METRICTOKEN }}
-          GITHUB_USER: acedmicabhishek
+          GITHUB_USER: Lettxys
         run: node .github/scripts/generate-profile.js
 
       - name: Set README to single profile SVG
         run: |
-          printf '<p align="center">\n  <img src="https://komarev.com/ghpvc/?username=acedmicabhishek&label=Profile%%20views&color=0e75b6&style=flat" alt="acedmicabhishek" />\n</p>\n\n![ACE Profile](./.github/assets/profile.svg)\n' > README.md
+          printf '![Leti](./.github/assets/profile.svg)\n' > README.md
 
       - name: Commit and push
         run: |

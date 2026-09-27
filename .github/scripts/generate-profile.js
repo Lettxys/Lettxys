@@ -220,12 +220,12 @@ function generateSVG(data) {
       <circle class="g-dot" cx="60" cy="${cy-65}" r="2" fill="#7ee7ff"/>
       <circle class="g-dot" cx="740" cy="${cy+45}" r="2" fill="#e8c8ff" style="animation-delay:1.5s"/>
       <circle class="g-dot" cx="700" cy="${cy-50}" r="1.5" fill="#ff88cc" style="animation-delay:2.5s"/>
-      <text x="400" y="${cy-48}" text-anchor="middle" font-family="${font}" font-size="48" font-weight="900" fill="#ffffff" letter-spacing="20" filter="url(#glow)">ACE</text>
-      <text x="400" y="${cy-8}" text-anchor="middle" font-family="${font}" font-size="11" fill="rgba(126,231,255,0.9)" letter-spacing="6" font-weight="700">SYSTEMS PROGRAMMER</text>
+      <text x="400" y="${cy-48}" text-anchor="middle" font-family="${font}" font-size="48" font-weight="900" fill="#ffffff" letter-spacing="20" filter="url(#glow)">LETI</text>
+      <text x="400" y="${cy-8}" text-anchor="middle" font-family="${font}" font-size="11" fill="rgba(126,231,255,0.9)" letter-spacing="6" font-weight="700">COMPUTER SCIENCE @ UFC</text>
       <line x1="260" y1="${cy+10}" x2="540" y2="${cy+10}" stroke="rgba(126,231,255,0.25)" stroke-width="1" filter="url(#glow)"/>
-      <text x="400" y="${cy+35}" text-anchor="middle" font-family="${font}" font-size="10" fill="rgba(232,200,255,0.8)" letter-spacing="3" font-weight="600">PERFORMANCE ENGINEER  |  OSDEV</text>
-      <text x="400" y="${cy+60}" text-anchor="middle" font-family="${font}" font-size="9.5" fill="rgba(126,231,255,0.6)" letter-spacing="2" font-weight="500">x86/ARM INTERNALS  \u2022  BARE-METAL  \u2022  SoC VALIDATION</text>
-      <text x="400" y="${cy+85}" text-anchor="middle" font-family="${font}" font-size="9" fill="rgba(100,100,140,0.5)" letter-spacing="1.5">github.com/acedmicabhishek</text>
+      <text x="400" y="${cy+35}" text-anchor="middle" font-family="${font}" font-size="10" fill="rgba(232,200,255,0.8)" letter-spacing="3" font-weight="600">PROGRAMMER  |  DEV</text>
+      <text x="400" y="${cy+60}" text-anchor="middle" font-family="${font}" font-size="9.5" fill="rgba(126,231,255,0.6)" letter-spacing="2" font-weight="500">ARTIFICIAL INTELLIGENCE  \u2022  CRYPTOGRAPHY  \u2022  SECURITY</text>
+      <text x="400" y="${cy+85}" text-anchor="middle" font-family="${font}" font-size="9" fill="rgba(100,100,140,0.5)" letter-spacing="1.5">github.com/Lettxys</text>
     </g>`;
   })();
   y += heroH + gap;
@@ -233,8 +233,8 @@ function generateSVG(data) {
   // ═══════════════ TECH STACK ═══════════════
   const techStack = (() => {
     const baseY = y;
-    const techs = ['C', 'C++', 'x86 ASM', 'Python', 'JavaScript', 'Rust', 'GLSL', 'OpenGL'];
-    const colors = ['#7ee7ff', '#e8c8ff', '#ff88cc', '#7ee7ff', '#e8c8ff', '#ff88cc', '#e8c8ff', '#7ee7ff'];
+    const techs = ['Python', 'Java', 'C', 'PHP', 'Deep Learning'];
+    const colors = ['#7ee7ff', '#e8c8ff', '#ff88cc', '#7ee7ff', '#e8c8ff'];
     let pills = '';
     // Calculate total width first to center them
     let totalPillW = 0;
@@ -450,7 +450,7 @@ ${statsBlock}
 ${langs}
 ${calendar}
 ${projects}
-<text x="400" y="${totalH-16}" text-anchor="middle" font-family="${font}" font-size="8.5" fill="rgba(100,100,150,0.45)" font-weight="600" letter-spacing="2">ACE SYSTEMS \u2022 HIGH PERFORMANCE INFRASTRUCTURE</text>
+<text x="400" y="${totalH-16}" text-anchor="middle" font-family="${font}" font-size="8.5" fill="rgba(100,100,150,0.45)" font-weight="600" letter-spacing="2">LETI \u2022 AI \u2022 CRYPTOGRAPHY \u2022 UFC</text>
 </svg>`;
 }
 
@@ -461,35 +461,25 @@ function mockData() {
     const days = [];
     for (let d = 0; d < 7; d++) {
       const date = new Date(Date.now() - (52 - w) * 7 * 86400000 + d * 86400000);
-      days.push({ contributionCount: Math.floor(Math.random() * 8), date: date.toISOString().split('T')[0], weekday: d });
+      days.push({ contributionCount: 0, date: date.toISOString().split('T')[0], weekday: d });
     }
     weeks.push({ contributionDays: days });
   }
   return {
-    stats: { totalStars: 12, totalForks: 5, totalRepos: 24, totalCommits: 847 },
+    stats: { totalStars: 0, totalForks: 0, totalRepos: 0, totalCommits: 0 },
     languages: [
-      { name: 'C++', color: '#f34b7d', percentage: 35 },
-      { name: 'C', color: '#555555', percentage: 14 },
-      { name: 'Python', color: '#3572A5', percentage: 11 },
-      { name: 'CSS', color: '#663399', percentage: 11 },
-      { name: 'GLSL', color: '#5686a5', percentage: 5 },
-      { name: 'Shell', color: '#89e051', percentage: 5 },
-      { name: 'Assembly', color: '#6E4C13', percentage: 5 },
-      { name: 'TypeScript', color: '#3178c6', percentage: 3 },
-      { name: 'HTML', color: '#e34c26', percentage: 3 },
-      { name: 'JavaScript', color: '#f1e05a', percentage: 3 },
+      { name: 'Python', color: '#3572A5', percentage: 25 },
+      { name: 'Java', color: '#b07219', percentage: 25 },
+      { name: 'C', color: '#555555', percentage: 25 },
+      { name: 'PHP', color: '#4F5D95', percentage: 25 },
     ],
-    topProjects: [
-      { name: 'BrainDance OS', desc: 'Custom x86 operating system with memory management and multitasking', stars: 8, forks: 2, lang: 'C', langColor: '#555555' },
-      { name: 'CAT', desc: 'LLVM-based compiler architecture toolkit for ARM/RISC-V backends', stars: 4, forks: 1, lang: 'C++', langColor: '#f34b7d' },
-      { name: 'Calcium 3D', desc: 'Real-time software renderer with vertex pipeline and rasterization', stars: 3, forks: 0, lang: 'C++', langColor: '#f34b7d' },
-    ],
-    calendar: { totalContributions: 847, weeks },
+    topProjects: [],
+    calendar: { totalContributions: 0, weeks },
   };
 }
 
 // Main
-const username = process.env.GITHUB_USER || 'acedmicabhishek';
+const username = process.env.GITHUB_USER || 'Lettxys';
 const token = process.env.GITHUB_TOKEN;
 
 (async () => {
